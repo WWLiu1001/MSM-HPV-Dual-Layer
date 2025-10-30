@@ -7,7 +7,7 @@ This repository contains simulation code for modeling HPV transmission and vacci
 It can estimate infection rates, indirect herd immunity effects, and inform national HPV vaccination policy. Additionally, the code includes a **Markov Chain Monte Carlo (MCMC) parameter calibration module** to optimize transmission probabilities and clearance rates, ensuring realistic epidemic dynamics.
 
 ## Features
-- Dual-layer sexual network: MSM-MSM and MSM-female/male interactions.
+- Dual-layer sexual network: MSM layer and heterosexual female/male layer.
 - Long-term infection dynamics simulation.
 - Vaccination strategy evaluation (coverage, timing).
 - Estimation of infection rates and indirect protection effects.
