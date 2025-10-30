@@ -41,9 +41,7 @@ best_parameters = None
 best_likelihood = np.inf
 
 # MCMC iteration process
-for i in range(iterations):
-
-    print (f"这是第{i}次迭代")
+for i in range(iterations):   
     # Generate new infection parameters using Beta distributions and adjust according to constraints
     new_prob1 = np.random.beta(alpha1, beta_param1)
     new_prob2 = np.random.beta(alpha2, beta_param2) 
@@ -941,3 +939,4 @@ df_beta_rej.to_excel('simulation_1000_beta_rej.xlsx', index=False)
 print("Best parameters:", best_parameters)
 print("Best SS value:", best_likelihood)
 print("Best simulated infection rates:", best_infected_rate)
+
