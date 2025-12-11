@@ -2,39 +2,32 @@ import pandas as pd
 import numpy as np
 import random
 import networkx as nx
-import matplotlib.pyplot as plt
-from collections import Counter
-from scipy.stats import beta
-import math
-from tqdm import tqdm
-import time
-from multiprocessing import Lock
 
 
 hpv_vac= [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]   #Setting hpv vaccination coverage
-gender_ratio = 
+gender_ratio = None  #TODO:Male–female population ratio; to be specified based on empirical data
 
 for hpv_vac_set in hpv_vac:
     random.seed(599)  
     np.random.seed(599) 
     
-    MSM_nodes_num =   #Setting msm simulation nodes number
+    MSM_nodes_num = None    #TODO:Setting msm simulation nodes number
     hpv_msm_num = int(MSM_nodes_num*hpv_vac_set)     #Setting hpv vaccination msm number at initialization
-    percent_18_msm =        #The HPV infection rate among 18-year-old MSM
-    hpv_vac_female =        #Initial number of females vaccinated and effectively protected
-    hpv_vac_female_18 =    #HPV vaccination rate among 18-year-old females
+    percent_18_msm =  None       #TODO:The HPV infection rate among 18-year-old MSM
+    hpv_vac_female =  None      #TODO:Initial number of females vaccinated and effectively protected
+    hpv_vac_female_18 = None   #TODO:HPV vaccination rate among 18-year-old females
     hpv_num = hpv_msm_num            # Initial number of people vaccinated against HPV
 
     
 
 
     #  Define infection transmission probabilities_mcmc
-    # Random selection probability of MSM to MSM transmission
-    infection_probabilities = [ ,  ]  # Random selection probability of MSM to MSM transmission
-    infection_prob_msm_to_female =        # Probability of MSM to female transmission
+    # Random selection probability of MSM to MSM transmission, getting from MCMC results
+    infection_probabilities = [ None,None  ]  #TODO: Random selection probability of MSM to MSM transmission (insertive and receptive)
+    infection_prob_msm_to_female = None       # TODO:Probability of MSM to female transmission
     infection_prob_male_to_female =  infection_prob_msm_to_female   # Probability of male to female transmission
-    infection_prob_female_to_msm_or_male =    # Probability of female to MSM or male transmission
-    clear_rate =   
+    infection_prob_female_to_msm_or_male = None   # TODO:Probability of female to MSM or male transmission
+    clear_rate =  None    #TODO: Clearance rate of HPV infection after 225 days 
         
     def simulate(data111):
         bisexual_msm_data, general_msm_data, age_dist_df = data111
@@ -50,8 +43,8 @@ for hpv_vac_set in hpv_vac:
         general_msm_data = general_msm_data[(general_msm_data['age'] >= 18) & (general_msm_data['age'] <= 70)]
        
         # Number of simulated nodes
-        total_msm_nodes = 
-        bisexual_proportion =   # The Proportion of Bisexual MSM
+        total_msm_nodes = None #TODO: Setting total msm simulation nodes number
+        bisexual_proportion = None   #TODO: The Proportion of Bisexual MSM
         bisexual_msm_count = int(total_msm_nodes * bisexual_proportion)
         general_msm_count = total_msm_nodes - bisexual_msm_count
 
@@ -73,19 +66,19 @@ for hpv_vac_set in hpv_vac:
         age_distribution = {}
 
         for age in range(18, 20):
-            age_distribution[age] = 
+            age_distribution[age] = None #TODO: Proportion of MSM aged 18-19
 
         for age in range(20, 30):
-            age_distribution[age] =  
+            age_distribution[age] = None #TODO: Proportion of MSM aged 20-29 
 
         for age in range(30, 40):
-            age_distribution[age] =  
+            age_distribution[age] = None #TODO: Proportion of MSM aged 30-39 
 
         for age in range(40, 50):
-            age_distribution[age] =  
+            age_distribution[age] = None #TODO: Proportion of MSM aged 40-49 
 
         for age in range(50, 71):
-            age_distribution[age] =  
+            age_distribution[age] = None #TODO: Proportion of MSM aged 50-70 
 
         # Calculate the number of individuals to be allocated each year 
         age_counts = {age: round(total_msm_nodes * prop) for age, prop in age_distribution.items()}
@@ -118,14 +111,14 @@ for hpv_vac_set in hpv_vac:
         # Generates the number of heterosexual partners based on the given age and probability distribution
         def generate_heterosexual_partners(age):
             if age <= 29:
-                alpha =  
-                beta =  
+                alpha = None #TODO: Set alpha value for age <=29 according to empirical data fitting results 
+                beta =  None #TODO: Set beta value for age <=29 according to empirical data fitting results
             elif age <= 39:
-                alpha =  
-                beta =  
+                alpha =  None #TODO: Set alpha value for age 30-39 according to empirical data fitting results
+                beta =  None #TODO: Set beta value for age 30-39 according to empirical data fitting results
             else:
-                alpha =  
-                beta =  
+                alpha = None #TODO: Set alpha value for age >=40 according to empirical data fitting results 
+                beta =  None #TODO: Set beta value for age >=40 according to empirical data fitting results
             
             # Generate samples from a discrete distribution par
             partners = np.arange(0, max_partners + 1)
@@ -144,18 +137,18 @@ for hpv_vac_set in hpv_vac:
         # Generate number of same-sex partners based on age and probability distribution
         def generate_same_sex_partners(age):
             if age <= 29:
-                alpha =  
-                beta =  
+                alpha = None  #TODO: Set alpha value for age <=29 according to empirical data fitting results 
+                beta =  None  #TODO: Set beta value for age <=29 according to empirical data fitting results
                 def probability_distribution(x):
                     if x == 0:
                         return 0
                     return alpha * x ** beta
             elif age <= 39:
-                alpha =  
+                alpha =  None  #TODO: Set alpha value for age 30-39 according to empirical data fitting results
                 def probability_distribution(x):
                     return alpha * np.exp(-alpha * x)
             else:
-                alpha = 
+                alpha = None  #TODO: Set alpha value for age >=40 according to empirical data fitting results
                 def probability_distribution(x):
                     return alpha * np.exp(-alpha * x)
             
@@ -305,7 +298,7 @@ for hpv_vac_set in hpv_vac:
 
 
         # Define female nodes’ male_partners probability distribution
-        female_partner_probabilities = [   ,    ,   ,    ]        # Add assigned male_partners attribute to each female node in the network
+        female_partner_probabilities = [ None, None, None, None ]        # TODO:Add assigned male_partners attribute to each female node in the network
         for i, female_node in enumerate(female_nodes):
             male_partners = np.random.choice([1, 2, 3, 4], size=1, p=female_partner_probabilities)
             network.nodes[female_node]['male_partners'] = male_partners.item()
@@ -333,7 +326,7 @@ for hpv_vac_set in hpv_vac:
 
         
         # Define female_partners probability distribution for male nodes
-        male_partner_probabilities = [    ,    ,    ,    ]
+        male_partner_probabilities = [ None, None, None, None ]   # TODO: Define male_partners probability distribution for male nodes  
 
         # Add male nodes to the network and assign age and partner counts
         male_counter = max(female_nodes) + 1
@@ -599,8 +592,8 @@ for hpv_vac_set in hpv_vac:
         
         
         # Number of simulation years
-        hpv_vac_female_18 =    # HPV vaccination rate for 18-year-old females
-        percent_18_msm =        # HPV infection rate among 18-year-old MSM
+        hpv_vac_female_18 = None   #TODO: HPV vaccination rate for 18-year-old female
+        percent_18_msm =  None       #TODO: HPV infection rate among 18-year-old MSM
         hpv_num = hpv_msm_num 
         for i in range(100):
             
@@ -617,9 +610,9 @@ for hpv_vac_set in hpv_vac:
 
             # Randomly remove some MSM nodes by age            
             age_removal_counts = {
-                remove_age1 :  ,
-                remove_age2:   ,
-                remove_age3: 
+                None: None ,  # TODO: Number of MSM nodes aged remove_age (None) to be removed
+                None:  None ,  # TODO: Number of MSM nodes aged remove_age2 (None) to be removed
+                None: None   # TODO: Number of MSM nodes aged remove_age3 (None) to be removed
             }
 
             for target_age, count in age_removal_counts.items():
@@ -667,8 +660,8 @@ for hpv_vac_set in hpv_vac:
                 network.add_node(new_node, type='msm', bisexual=False, age=18, infected=False,ever_infected = False,hpv_vac=False)
                 new_msm_nodes.append(new_node)
             # Randomly select some of the new MSM nodes to assign age so as to maintain the MSM age distribution
-            if len(new_msm_nodes) >=   :
-                selected_for_age_20 = random.sample(new_msm_nodes, )
+            if len(new_msm_nodes) >= None:  # TODO: Number of new MSM nodes to be assigned age 20
+                selected_for_age_20 = random.sample(new_msm_nodes, None) # TODO: Number of new MSM nodes to be assigned age 20
             else:                
                 selected_for_age_20 = new_msm_nodes
 
@@ -691,7 +684,7 @@ for hpv_vac_set in hpv_vac:
             for node in msm_true_nodes[:num_infected_true]:
                 network.nodes[node]['infected'] = True
                 network.nodes[node]['ever_infected'] = True
-            percent_18_msm =  percent_18_msm *(1-0.8560*hpv_vac_set)        # Implement GRASP algorithm: connect female nodes with male nodes
+            percent_18_msm =  percent_18_msm *(1-0.856*hpv_vac_set)        # Implement GRASP algorithm: connect female nodes with male nodes
         def grasp_connect_female_male1(network, female_nodes, male_nodes):
             # Extract node identifiers
             female_node_ids = [node['node_id'] for node in female_nodes]
@@ -757,8 +750,8 @@ for hpv_vac_set in hpv_vac:
         # Initialize an empty list to store yearly data
         data = []     
                 
-        hpv_vac_female_18 =    # HPV vaccination rate for 18-year-old females
-        percent_18_msm =        # HPV infection rate among 18-year-old MSM
+        hpv_vac_female_18 = None   # TODO:HPV vaccination rate for 18-year-old females
+        percent_18_msm = None       # TODO:HPV infection rate among 18-year-old MSM
         hpv_num = hpv_msm_num 
         for i in range(100):
             
@@ -775,9 +768,9 @@ for hpv_vac_set in hpv_vac:
 
             # Randomly remove some MSM nodes by age            
             age_removal_counts = {
-                remove_age1 :  ,
-                remove_age2:   ,
-                remove_age3: 
+                None: None ,  # TODO: Number of MSM nodes aged remove_age1 (None) to be removed,
+                None: None ,  # TODO: Number of MSM nodes aged remove_age2 (None) to be removed,
+                None: None   # TODO: Number of MSM nodes aged remove_age3 (None) to be removed,
             }
 
             for target_age, count in age_removal_counts.items():
@@ -825,8 +818,8 @@ for hpv_vac_set in hpv_vac:
                 network.add_node(new_node, type='msm', bisexual=False, age=18, infected=False,ever_infected = False,hpv_vac=False)
                 new_msm_nodes.append(new_node)
             # Randomly select some of the new MSM nodes to assign age so as to maintain the MSM age distribution
-            if len(new_msm_nodes) >=   :
-                selected_for_age_20 = random.sample(new_msm_nodes, )
+            if len(new_msm_nodes) >= None:  # TODO: Number of new MSM nodes to be assigned age 20
+                selected_for_age_20 = random.sample(new_msm_nodes, None) # TODO: Number of new MSM nodes to be assigned age 20
             else:                
                 selected_for_age_20 = new_msm_nodes
 
@@ -853,7 +846,7 @@ for hpv_vac_set in hpv_vac:
             
             
             # Choose different i values depending on vaccination timing (i = 0, 4, 9, 14)
-            if i == :
+            if i == None:  # TODO: First year of MSM-target HPV vaccination (2025,2030, 2035, 2040 = 0, 4, 9, 14)
                 # MSM-target HPV vaccination
                 msm_nodes_yanqi = [node for node, data in network.nodes(data=True) if data['type'] == 'msm' and data['age'] < 45]
                 random.shuffle(msm_nodes_yanqi)                
@@ -875,7 +868,7 @@ for hpv_vac_set in hpv_vac:
                     network.nodes[node]['hpv_vac'] = False  
 
             # HPV vaccination for newly added 18-year-old MSM, choose different i values depending on timing (i = 0, 4, 9, 14)
-            if i > :
+            if i > None:  # TODO: Years after MSM-target HPV vaccination starts (2025,2030, 2035, 2040 = 0, 4, 9, 14)
                 msm_18_year_nodes = [node for node, data in network.nodes(data=True) if data['type'] == 'msm' and data['age'] == 18]
                 num_18_year_msm_hpv = int(hpv_vac_set * len( msm_18_year_nodes)* 0.8560)
                 for node in msm_18_year_nodes[:num_18_year_msm_hpv]:
@@ -922,10 +915,10 @@ for hpv_vac_set in hpv_vac:
                     node[1]['female_partners'] = generate_heterosexual_partners(age)
 
             # Define male nodes' female_partners probability distribution
-            male_partner_probabilities = [  ,   ,   ,   ]
+            male_partner_probabilities = [None,None,None,None]  # TODO: Define male_partners probability distribution   
 
             # Define female nodes' male_partners probability distribution
-            female_partner_probabilities = [  ,   ,   ,   ]
+            female_partner_probabilities = [None,None,None,None]  # TODO: Define female_partners probability distribution   
 
             # Assign female_partners to nodes with type=male
             for node in network.nodes(data=True):
@@ -1048,7 +1041,7 @@ for hpv_vac_set in hpv_vac:
                             network.nodes[recovered_node]['infected'] = False
                             network.nodes[recovered_node]['infection_time'] = 0  # Reset infection time after recovery
             
-            if i > : # Choose different i values depending on vaccination timing (i=0, 4, 9, 14) 
+            if i > None: #TODO:Choose different i values depending on vaccination timing (i=0, 4, 9, 14; year=2025,2030, 2035, 2040) 
                 # Final count of infected nodes
                 infected_msm_count = sum(1 for node, attributes in network.nodes(data=True) if attributes['infected'] and attributes.get('type') == 'msm')                
                 rate1_list.append(infected_msm_count)                

@@ -2,36 +2,30 @@ import pandas as pd
 import numpy as np
 import random
 import networkx as nx
-import matplotlib.pyplot as plt
-from collections import Counter
-from scipy.stats import beta
-import math
-from tqdm import tqdm
-import time
-from multiprocessing import Lock
+
 
 random.seed(599) 
 np.random.seed(599)
 
-real_rate1=
-real_rate2=
-real_rate3=
+real_rate1= None  # TODO: Real infection rate for MSM
+real_rate2= None  # TODO: Real infection rate for heterosexual women
+real_rate3= None  # TODO: Real infection rate for heterosexual men
 
-gender_ratio=
+gender_ratio= None  # TODO: Male-to-female ratio; fill in according to actual data
 # Define likelihood function
 def likelihood(median_rate1, median_rate2,median_rate3):
     return (median_rate1 - real_rate1) ** 2 + (median_rate2 - real_rate2) ** 2 + (median_rate3 - real_rate3) ** 2
 
-# Define MCMC parameter distributions
-alpha1 = 
-beta_param1 = 
-alpha2 = 
-beta_param2 = 
-alpha3 =
-beta_param3 = 
-alpha4 = 
-beta_param4 = 
-iterations =   # iterations for MCMC
+# TODO:Define MCMC parameter distributions
+alpha1 = None 
+beta_param1 = None
+alpha2 = None
+beta_param2 = None 
+alpha3 = None
+beta_param3 = None
+alpha4 = None
+beta_param4 = None
+iterations = None  # iterations for MCMC
 beta_results_acc = []
 beta_results_rej = []
 
@@ -60,16 +54,14 @@ for i in range(iterations):
    
     # Define a single MCMC iteration simulation function
     def simulate(data111):
-        age_dist_df = data111
-
-        start_time = time.time()
+        age_dist_df = data111        
 
         rate1_list = [] # List of MSM infection rates
         rate2_list = [] # List of heterosexual women infection rates
         rate3_list = [] # List of heterosexual men infection rates
         # Number of simulated nodes
-        total_msm_nodes = 
-        bisexual_proportion =   # proportion of bisexual MSM
+        total_msm_nodes = None  # TODO: Total number of MSM nodes to simulate 
+        bisexual_proportion = None     # TODO:proportion of bisexual MSM
         bisexual_msm_count = int(total_msm_nodes * bisexual_proportion)
         general_msm_count = total_msm_nodes - bisexual_msm_count
 
@@ -91,19 +83,19 @@ for i in range(iterations):
         age_distribution = {}
 
         for age in range(18, 20):
-            age_distribution[age] = 
+            age_distribution[age] = None  # TODO: Proportion of MSM aged 18-19
 
         for age in range(20, 30):
-            age_distribution[age] = 
+            age_distribution[age] = None #TODO: Proportion of MSM aged 20-29
 
         for age in range(30, 40):
-            age_distribution[age] = 
+            age_distribution[age] = None  # TODO: Proportion of MSM aged 30-39
 
         for age in range(40, 50):
-            age_distribution[age] = 
+            age_distribution[age] = None  # TODO: Proportion of MSM aged 40-49
 
         for age in range(50, 71):
-            age_distribution[age] = 
+            age_distribution[age] = None  # TODO: Proportion of MSM aged 50-70
 
         # Compute counts per age (rounded)
         age_counts = {age: round(total_msm_nodes * prop) for age, prop in age_distribution.items()}
@@ -136,14 +128,14 @@ for i in range(iterations):
         # Function: generate number of heterosexual partners based on age and probability distribution
         def generate_heterosexual_partners(age):
             if age <= 29:
-                alpha = 
-                beta = 
+                alpha = None #TODO: Set alpha for age <=29
+                beta = None  #TODO: Set beta for age <=29
             elif age <= 39:
-                alpha =
-                beta = 
+                alpha =None  #TODO: Set alpha for age 30-39
+                beta = None  #TODO: Set beta for age 30-39
             else:
-                alpha = 
-                beta = 
+                alpha = None  #TODO: Set alpha for age 40+
+                beta = None   #TODO: Set beta for age 40+
             
             # Generate discrete distribution samples
             partners = np.arange(0, max_partners + 1)
@@ -164,18 +156,18 @@ for i in range(iterations):
         # Function: generate number of same-sex partners based on age and probability distribution
         def generate_same_sex_partners(age):
             if age <= 29:
-                alpha = 
-                beta = 
+                alpha = None #TODO: Set alpha for age <=29
+                beta = None  #TODO: Set beta for age <=29   
                 def probability_distribution(x):
                     if x == 0:
                         return 0
                     return alpha * x ** beta
             elif age <= 39:
-                alpha = 
+                alpha = None  #TODO: Set alpha for age 30-39
                 def probability_distribution(x):
                     return alpha * np.exp(-alpha * x)
             else:
-                alpha = 
+                alpha = None  #TODO: Set alpha for age 40+
                 def probability_distribution(x):
                     return alpha * np.exp(-alpha * x)
             
@@ -332,7 +324,7 @@ for i in range(iterations):
 
 
         # Define male_partners probability distribution for female nodes
-        female_partner_probabilities = [   , , , ]
+        female_partner_probabilities = [ None,None,None,None ] #TODO: Define probabilities for 1,2,3,4 partners
 
         # Add assigned male_partners attribute to each female node in the network
         for i, female_node in enumerate(female_nodes):
@@ -366,7 +358,7 @@ for i in range(iterations):
         # Assign ages to male nodes
         # male_ages = sample_age_from_distribution(num_male_nodes, age_bins, density_values).astype(int)
         # Define female_partners probability distribution for male nodes
-        male_partner_probabilities = [   ,    ,    ,    ]
+        male_partner_probabilities = [None, None,None,None] #TODO: Define probabilities for 1,2,3,4 partners    
 
         # Add male nodes to the network and assign age and partner counts
         male_counter = max(female_nodes) + 1
@@ -610,9 +602,9 @@ for i in range(iterations):
 
             # Randomly remove some MSM nodes by age            
             age_removal_counts = {
-                age_remove:   ,
-                age_remove:   ,
-                age_remove:   
+                None: None ,  # TODO: Number of MSM nodes aged remove_age1 (None) to be removed,
+                None: None ,  # TODO: Number of MSM nodes aged remove_age2 (None) to be removed,
+                None: None   # TODO: Number of MSM nodes aged remove_age3 (None) to be removed,   
             }
 
             for target_age, count in age_removal_counts.items():
@@ -622,7 +614,7 @@ for i in range(iterations):
                     if attr.get('type') == 'msm' and attr.get('age') == target_age
                 ]
                 if len(age_matched_nodes) < count:
-                    print(f"Warning: 仅找到 {len(age_matched_nodes)} 个年龄为 {target_age} 岁的MSM节点，少于{count}个，将全部移除。")
+                    print(f"Warning: Only find {len(age_matched_nodes)} MSM nodes aged {target_age} , less then {count}, will be removed all of them.")
                     sampled_nodes = age_matched_nodes
                 else:
                     sampled_nodes = random.sample(age_matched_nodes, count)
@@ -665,7 +657,7 @@ for i in range(iterations):
 
             
             # Randomly select some of the new MSM nodes and assign age = 20 (to maintain MSM age distribution)
-            if len(new_msm_nodes) >=   :
+            if len(new_msm_nodes) >= None:  # TODO: specify number of new MSM nodes to set age=20
                 selected_for_age_20 = random.sample(new_msm_nodes,   )
             else:               
                 selected_for_age_20 = new_msm_nodes
@@ -858,17 +850,10 @@ for i in range(iterations):
             rate1_list.append(msm_rate)  # Append result to list
             rate2_list.append(female_rate)
             rate3_list.append(male_rate)
-            
-        
-        # print("out of loop!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
-        end_time = time.time()
-        # print(f"operate time is {end_time - start_time}")
+               
     
         return rate1_list, rate2_list, rate3_list
-
-    # rate1_list, rate2_list = simulate(1)
-    
+       
     from multiprocessing import Pool
     import numpy as np
     import concurrent.futures
