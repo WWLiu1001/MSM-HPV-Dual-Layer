@@ -890,7 +890,7 @@ for hpv_vac_set in hpv_vac:
                 network.nodes[node]['hpv_vac'] = True
                 network.nodes[node]['infected'] = False      
             if hpv_vac_female_18 < 0.9:
-                hpv_vac_female_18 = hpv_vac_female_18 + 0.175      # 18-year-old female vaccination increases by 17.5% annually, aiming toward WHO target (2023 girls coverage = 90%)
+                hpv_vac_female_18 = hpv_vac_female_18 + 0.125      # 18-year-old female vaccination increases by 12.5% annually, aiming toward WHO target (2030 girls coverage = 90%)
                       
             # Clear all edges in the graph
             network.clear_edges()
